@@ -2,13 +2,14 @@
 
 from django.db import models
 
-# Create your models here.
-class User(models.Model):
-    name = models.CharField(max_length=200)
-    email = models.EmailField()
-
+class Place(models.Model):
+    pass
+    
+class Route(models.Model):
+    pass
+    
 class Competition(models.Model):
-    name  = models.CharField(models.Model)
+    name  = models.CharField(max_length=200)
     description = models.TextField()
 
 class Activity(models.Model):

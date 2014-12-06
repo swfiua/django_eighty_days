@@ -21,6 +21,7 @@ class TestDjango_eighty_days(unittest.TestCase):
         pass
 
     def test_something(self):
+        #raise Exception
         pass
 
     def tearDown(self):
