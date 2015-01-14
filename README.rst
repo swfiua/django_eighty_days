@@ -33,3 +33,17 @@ Features
 --------
 
 * TODO
+
+Auto-generating API code
+------------------------
+
+django_eighty_days/codegen.py is used to auto-generate api.py,
+serializer.py and urls.py.
+
+If new models are added to models.py you just need to re-run::
+
+   python django_eighty_days/codgen.py
+
+All goes well it will update the api/serializer and url code with new
+boiler plate for the new models.
+
