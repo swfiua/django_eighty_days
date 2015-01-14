@@ -11,4 +11,4 @@ for name, clazz in codegen.get_models():
 
 ]]]"""
 
-#[[[end]]] (checksum: 8d776de98175cbe99f1106b0ae5af988)
+#[[[end]]]
