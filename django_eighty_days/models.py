@@ -24,6 +24,11 @@ class Competition(models.Model):
     name  = models.CharField(max_length=NAME_LENGTH)
     description = models.TextField()
     team_size = models.PositiveIntegerField()
+
+    def __str__(self):
+
+        return self.name
+
     
 
 class Competitor(models.Model):
@@ -32,20 +37,37 @@ class Competitor(models.Model):
     nickname = models.CharField(max_length=NAME_LENGTH)
     competition = models.ForeignKey('Competition')
 
+    def __str__(self):
+
+        return self.nickname
+
 class Team(models.Model):
     """ A team entered in a competition """
     name = models.CharField(max_length=NAME_LENGTH)
     captain = models.ForeignKey(Competitor)
+    def __str__(self):
+
+        return self.name
 
 class TeamMember(models.Model):
     """ A team member is a competitor associcated with a team """
     competitor = models.ForeignKey(Competitor)
     team = models.ForeignKey(Team)
 
+    def __str__(self):
+
+        return '/'.join(str(self.competitor), str(self.team))
+
+
 class TeamMemberRequest(models.Model):
     """ Handles requests to join a team """
     team = models.ForeignKey(Team)
     competitor = models.ForeignKey(Competitor)
+
+    def __str__(self):
+
+        return '/'.join(str(self.competitor), str(self.team))
+    
     
     
 # Places and routes -- should use GTFS
@@ -61,6 +83,11 @@ class Activity(models.Model):
     name = models.CharField(max_length=NAME_LENGTH)
     units = models.CharField(max_length=NAME_LENGTH)
     miles_per_unit = models.FloatField()
+
+    def __str__(self):
+
+        return self.name
+    
     
 class Workout(models.Model):
     """ Each workout is an activity
@@ -72,3 +99,6 @@ class Workout(models.Model):
     date = models.DateField()
 
 
+    def __str__(self):
+
+        return '/'.join(str(self.activity), str(self.date))
