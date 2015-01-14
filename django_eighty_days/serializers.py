@@ -1,22 +1,14 @@
 from rest_framework import serializers
 from django_eighty_days import models
 
-class CompetitionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Competition
+"""[[[cog
 
-class CompetitorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Competitor
+from django_eighty_days import codegen
 
-class TeamSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Team
+for name, clazz in codegen.get_models():
 
-class TeamMemberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.TeamMember
+    cog.out(codegen.get_serializer_code(name))
 
-class TeamMemberRequestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.TeamMemberRequest
+]]]"""
+
+#[[[end]]] (checksum: 8d776de98175cbe99f1106b0ae5af988)
