@@ -25,6 +25,10 @@ class %(name)sSerializer(serializers.ModelSerializer):
         model = models.%(name)s
 """
 
+URL_TEMPLATE = """
+    url(r'^%(lname)ss/$', api.%(name)sList.as_view()),
+    url(r'^%(lname)ss/(?P<pk>[0-9]+)/$', api.%(name)sList.as_view(), name='%(lname)s-detail'),
+"""
 
 def get_models():
     """ Return the model classes for this app
@@ -42,6 +46,11 @@ def get_api_code(name):
 def get_serializer_code(name):
     """ Generate Serializer class for name """
     return SERIALIZE_TEMPLATE % dict(name=name)
+
+def get_url_code(name):
+    """ Generate code needed in urls file for name """
+    return URL_TEMPLATE % dict(name=name, lname=name.lower())
+    
 
 if __name__ == '__main__':
 
