@@ -1,4 +1,4 @@
-from django_eighty_days models, serializers
+from django_eighty_days import models, serializers
 
 from rest_framework import generics
 from rest_framework.decorators import api_view
