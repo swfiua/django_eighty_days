@@ -18,6 +18,7 @@ try:
             "django.contrib.sites",
             "django_eighty_days",
         ],
+        MIDDLEWARE_CLASSES = [],
         SITE_ID=1,
         NOSE_ARGS=['-s'],
     )
