@@ -21,6 +21,7 @@ try:
         MIDDLEWARE_CLASSES = [],
         SITE_ID=1,
         NOSE_ARGS=['-s'],
+        AUTH_USER_MODEL='auth.User',
     )
 
     try:

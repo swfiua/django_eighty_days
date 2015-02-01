@@ -2,13 +2,9 @@
 
 from django.db import models
 from django.conf import settings
-from django.apps import apps
 
 # max length for names in models
 NAME_LENGTH=200
-
-# Get the user model
-#UserModel = apps.get_model(settings.AUTH_USER_MODEL)
 
 # Teams and competitors
 class Competition(models.Model):
@@ -33,7 +29,7 @@ class Competition(models.Model):
 
 class Competitor(models.Model):
     """ Competitor is a user competing in a competition """
-    user = models.ForeignKey('auth.User')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     nickname = models.CharField(max_length=NAME_LENGTH)
     competition = models.ForeignKey('Competition')
 
