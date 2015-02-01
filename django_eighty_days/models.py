@@ -33,7 +33,7 @@ class Competition(models.Model):
 
 class Competitor(models.Model):
     """ Competitor is a user competing in a competition """
-    user = models.ForeignKey('users.User')
+    user = models.ForeignKey('auth.User')
     nickname = models.CharField(max_length=NAME_LENGTH)
     competition = models.ForeignKey('Competition')
 
