@@ -45,5 +45,8 @@ urlpatterns = [
 ]
 #[[[end]]] (checksum: a173acc479c899ad2bc3ec5a849165b6)
 
+urlpatterns += [
+    url(r'^datetime_as_timestamp/$$', api.datetime_as_timestamp),
+]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

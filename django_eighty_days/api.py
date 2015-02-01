@@ -4,6 +4,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+import datetime
 
 """[[[cog
 
@@ -105,3 +106,35 @@ class WorkoutList(generics.ListCreateAPIView):
     queryset = models.Workout.objects.all()
     serializer_class = serializers.WorkoutSerializer
 #[[[end]]] (checksum: 0bceace600ebefa13f4d33a43652ebd7)
+
+# Non cog-generated code below
+
+@api_view(['GET'])    
+def datetime_as_timestamp(request):
+    """ Get date timestamps """
+
+    result = {}
+    result['now'] = unixtime(datetime.datetime.now()) * 1000
+
+    return Response(result)
+
+def unixtime(dt):
+    """ Return the unixtime in seconds.
+
+    Assumes dt is in UTC
+
+    >>> unixtime(datetime.datetime(1970, 1, 1))
+    0
+
+    >>> unixtime(datetime.datetime(1970, 1, 2))
+    86400
+
+    """
+    return (dt - datetime.datetime(1970, 1, 1)).total_seconds()
+
+if __name__ == '__main__':
+    # FIXME -- need to figureout how to test django apps
+
+    import doctest
+
+    doctest.testmod()
