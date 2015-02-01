@@ -124,10 +124,11 @@ def unixtime(dt):
     Assumes dt is in UTC
 
     >>> unixtime(datetime.datetime(1970, 1, 1))
-    0
+    0.0
 
+    # Go forward a day = 24 * 3600 seconds
     >>> unixtime(datetime.datetime(1970, 1, 2))
-    86400
+    86400.0
 
     """
     return (dt - datetime.datetime(1970, 1, 1)).total_seconds()
