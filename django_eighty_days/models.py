@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import datetime
+
 from django.db import models
 from django.conf import settings
 
@@ -19,6 +21,8 @@ class Competition(models.Model):
     """
     name  = models.CharField(max_length=NAME_LENGTH)
     description = models.TextField()
+    start = models.DateField(default=datetime.date.today())
+    days = models.PositiveIntegerField(default=80)
     team_size = models.PositiveIntegerField()
 
     def __str__(self):
