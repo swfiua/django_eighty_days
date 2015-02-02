@@ -26,7 +26,7 @@ class %(name)sSerializer(serializers.ModelSerializer):
 """
 
 URL_TEMPLATE = """
-    url(r'^%(lname)ss/$', api.%(name)sList.as_view()),
+    url(r'^%(lname)ss/$', api.%(name)sList.as_view(), name='%(lname)s'),
     url(r'^%(lname)ss/(?P<pk>[0-9]+)/$', api.%(name)sList.as_view(), name='%(lname)s-detail'),
 """
 
