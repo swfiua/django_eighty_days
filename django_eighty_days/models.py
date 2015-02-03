@@ -56,7 +56,7 @@ class TeamMember(models.Model):
 
     def __str__(self):
 
-        return '/'.join(str(self.competitor), str(self.team))
+        return str(self.competitor) + '/' +  str(self.team)
 
 
 class TeamMemberRequest(models.Model):

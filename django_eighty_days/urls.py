@@ -47,6 +47,8 @@ urlpatterns = [
 
 urlpatterns += [
     url(r'^datetime_as_timestamp/$$', api.datetime_as_timestamp),
+    url(r'^everything_for_user/$$', api.get_everything_for_user),
 ]
 
+    
 urlpatterns = format_suffix_patterns(urlpatterns)
