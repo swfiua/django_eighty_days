@@ -24,39 +24,32 @@ class Competition(models.Model):
     start = models.DateField(default=datetime.date.today())
     days = models.PositiveIntegerField(default=80)
     team_size = models.PositiveIntegerField()
+    competitors = models.ManyToManyField('Competitor')
+    teams = models.ManyToManyField('Team')
 
     def __str__(self):
 
         return self.name
-
-    
 
 class Competitor(models.Model):
     """ Competitor is a user competing in a competition """
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     nickname = models.CharField(max_length=NAME_LENGTH)
-    competition = models.ForeignKey('Competition')
 
     def __str__(self):
 
         return self.nickname
 
+
 class Team(models.Model):
     """ A team entered in a competition """
     name = models.CharField(max_length=NAME_LENGTH)
-    captain = models.ForeignKey(Competitor)
+    captain = models.ForeignKey(Competitor, related_name='captain')
+    team_members = models.ManyToManyField('Competitor')
+    team_member_requests = models.ManyToManyField('TeamMemberRequest', related_name='team_member_request')
     def __str__(self):
 
         return self.name
-
-class TeamMember(models.Model):
-    """ A team member is a competitor associcated with a team """
-    competitor = models.ForeignKey(Competitor)
-    team = models.ForeignKey(Team)
-
-    def __str__(self):
-
-        return str(self.competitor) + '/' +  str(self.team)
 
 
 class TeamMemberRequest(models.Model):
