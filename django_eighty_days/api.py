@@ -133,6 +133,32 @@ def unixtime(dt):
     """
     return (dt - datetime.datetime(1970, 1, 1)).total_seconds()
 
+@api_view(['GET'])
+def get_everything_for_user(request):
+    """ Get all user data """
+    result = {}
+
+    user = request.user
+
+    # don't return anything of not logged in
+    if not user.is_authenticated():
+        return Response({})
+
+    # Get competitions user is in
+    competitions = user.competitor_set.all()
+
+    # Get teams that user belongs to
+    teams = models.TeamMember.objects.filter(competitor__in=competitions)
+
+    # Get teams that user is captain of
+    captains = models.Team.objects.filter(captain__in=competitions)
+    
+    result['competitions'] = [serializers.CompetitorSerializer(x).data for x in competitions]
+    result['teams'] = [serializers.TeamMemberSerializer(x).data for x in teams]
+    result['captains'] = [serializers.TeamSerializer(x).data for x in captains]
+
+    return Response(result)
+
 if __name__ == '__main__':
     # FIXME -- need to figureout how to test django apps
 
