@@ -34,16 +34,13 @@ urlpatterns = [
     url(r'^teams/$', api.TeamList.as_view(), name='team'),
     url(r'^teams/(?P<pk>[0-9]+)/$', api.TeamList.as_view(), name='team-detail'),
 
-    url(r'^teammembers/$', api.TeamMemberList.as_view(), name='teammember'),
-    url(r'^teammembers/(?P<pk>[0-9]+)/$', api.TeamMemberList.as_view(), name='teammember-detail'),
-
     url(r'^teammemberrequests/$', api.TeamMemberRequestList.as_view(), name='teammemberrequest'),
     url(r'^teammemberrequests/(?P<pk>[0-9]+)/$', api.TeamMemberRequestList.as_view(), name='teammemberrequest-detail'),
 
     url(r'^workouts/$', api.WorkoutList.as_view(), name='workout'),
     url(r'^workouts/(?P<pk>[0-9]+)/$', api.WorkoutList.as_view(), name='workout-detail'),
 ]
-#[[[end]]] (checksum: 6b2320c1bf07b66fb588e27fb646501f)
+#[[[end]]] (checksum: ad6a9305f322b9893939fa3931dbe49d)
 
 urlpatterns += [
     url(r'^datetime_as_timestamp/$$', api.datetime_as_timestamp),

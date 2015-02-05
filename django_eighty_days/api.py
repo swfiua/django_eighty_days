@@ -76,16 +76,6 @@ class TeamList(generics.ListCreateAPIView):
     queryset = models.Team.objects.all()
     serializer_class = serializers.TeamSerializer
 
-class TeamMemberList(generics.ListCreateAPIView):
-    """ Create or get TeamMember objects
-    
-    Without a pk, returns all TeamMember objects.
-
-    With a pk, returns just that TeamMember
-    """
-    queryset = models.TeamMember.objects.all()
-    serializer_class = serializers.TeamMemberSerializer
-
 class TeamMemberRequestList(generics.ListCreateAPIView):
     """ Create or get TeamMemberRequest objects
     
@@ -105,7 +95,7 @@ class WorkoutList(generics.ListCreateAPIView):
     """
     queryset = models.Workout.objects.all()
     serializer_class = serializers.WorkoutSerializer
-#[[[end]]] (checksum: 0bceace600ebefa13f4d33a43652ebd7)
+#[[[end]]] (checksum: 83a3d272e4b33d0142c0701f0b93b165)
 
 # Non cog-generated code below
 

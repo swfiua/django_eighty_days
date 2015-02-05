@@ -35,10 +35,6 @@ class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Team
 
-class TeamMemberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.TeamMember
-
 class TeamMemberRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.TeamMemberRequest
@@ -46,4 +42,4 @@ class TeamMemberRequestSerializer(serializers.ModelSerializer):
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Workout
-#[[[end]]] (checksum: 8d776de98175cbe99f1106b0ae5af988)
+#[[[end]]] (checksum: a9ea2a47c322a5e261c5c5015d93be6a)
