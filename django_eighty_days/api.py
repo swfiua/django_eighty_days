@@ -16,86 +16,174 @@ for name, clazz in codegen.get_models():
 
 ]]]"""
 
-class ActivityList(generics.ListCreateAPIView):
-    """ Create or get Activity objects
-    
-    Without a pk, returns all Activity objects.
+class ActivityCreate(generics.CreateAPIView):
+    """ Create Activity object """
+    queryset = models.Activity.objects.all()
+    serializer_class = serializers.ActivitySerializer
 
-    With a pk, returns just that Activity
+class ActivityDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Retrieve, update or delete individual Activity objects
+    
+    Supply pk of the object to work on.
     """
     queryset = models.Activity.objects.all()
     serializer_class = serializers.ActivitySerializer
 
-class CompetitionList(generics.ListCreateAPIView):
-    """ Create or get Competition objects
+class ActivityList(generics.ListCreateAPIView):
+    """ Create or get Activity objects
     
-    Without a pk, returns all Competition objects.
+    returns all Activity objects.
+    """
+    queryset = models.Activity.objects.all()
+    serializer_class = serializers.ActivitySerializer
 
-    With a pk, returns just that Competition
+class CompetitionCreate(generics.CreateAPIView):
+    """ Create Competition object """
+    queryset = models.Competition.objects.all()
+    serializer_class = serializers.CompetitionSerializer
+
+class CompetitionDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Retrieve, update or delete individual Competition objects
+    
+    Supply pk of the object to work on.
     """
     queryset = models.Competition.objects.all()
     serializer_class = serializers.CompetitionSerializer
 
-class CompetitorList(generics.ListCreateAPIView):
-    """ Create or get Competitor objects
+class CompetitionList(generics.ListCreateAPIView):
+    """ Create or get Competition objects
     
-    Without a pk, returns all Competitor objects.
+    returns all Competition objects.
+    """
+    queryset = models.Competition.objects.all()
+    serializer_class = serializers.CompetitionSerializer
 
-    With a pk, returns just that Competitor
+class CompetitorCreate(generics.CreateAPIView):
+    """ Create Competitor object """
+    queryset = models.Competitor.objects.all()
+    serializer_class = serializers.CompetitorSerializer
+
+class CompetitorDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Retrieve, update or delete individual Competitor objects
+    
+    Supply pk of the object to work on.
     """
     queryset = models.Competitor.objects.all()
     serializer_class = serializers.CompetitorSerializer
 
-class PlaceList(generics.ListCreateAPIView):
-    """ Create or get Place objects
+class CompetitorList(generics.ListCreateAPIView):
+    """ Create or get Competitor objects
     
-    Without a pk, returns all Place objects.
+    returns all Competitor objects.
+    """
+    queryset = models.Competitor.objects.all()
+    serializer_class = serializers.CompetitorSerializer
 
-    With a pk, returns just that Place
+class PlaceCreate(generics.CreateAPIView):
+    """ Create Place object """
+    queryset = models.Place.objects.all()
+    serializer_class = serializers.PlaceSerializer
+
+class PlaceDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Retrieve, update or delete individual Place objects
+    
+    Supply pk of the object to work on.
     """
     queryset = models.Place.objects.all()
     serializer_class = serializers.PlaceSerializer
 
-class RouteList(generics.ListCreateAPIView):
-    """ Create or get Route objects
+class PlaceList(generics.ListCreateAPIView):
+    """ Create or get Place objects
     
-    Without a pk, returns all Route objects.
+    returns all Place objects.
+    """
+    queryset = models.Place.objects.all()
+    serializer_class = serializers.PlaceSerializer
 
-    With a pk, returns just that Route
+class RouteCreate(generics.CreateAPIView):
+    """ Create Route object """
+    queryset = models.Route.objects.all()
+    serializer_class = serializers.RouteSerializer
+
+class RouteDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Retrieve, update or delete individual Route objects
+    
+    Supply pk of the object to work on.
     """
     queryset = models.Route.objects.all()
     serializer_class = serializers.RouteSerializer
 
-class TeamList(generics.ListCreateAPIView):
-    """ Create or get Team objects
+class RouteList(generics.ListCreateAPIView):
+    """ Create or get Route objects
     
-    Without a pk, returns all Team objects.
+    returns all Route objects.
+    """
+    queryset = models.Route.objects.all()
+    serializer_class = serializers.RouteSerializer
 
-    With a pk, returns just that Team
+class TeamCreate(generics.CreateAPIView):
+    """ Create Team object """
+    queryset = models.Team.objects.all()
+    serializer_class = serializers.TeamSerializer
+
+class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Retrieve, update or delete individual Team objects
+    
+    Supply pk of the object to work on.
     """
     queryset = models.Team.objects.all()
     serializer_class = serializers.TeamSerializer
 
-class TeamMemberRequestList(generics.ListCreateAPIView):
-    """ Create or get TeamMemberRequest objects
+class TeamList(generics.ListCreateAPIView):
+    """ Create or get Team objects
     
-    Without a pk, returns all TeamMemberRequest objects.
+    returns all Team objects.
+    """
+    queryset = models.Team.objects.all()
+    serializer_class = serializers.TeamSerializer
 
-    With a pk, returns just that TeamMemberRequest
+class TeamMemberRequestCreate(generics.CreateAPIView):
+    """ Create TeamMemberRequest object """
+    queryset = models.TeamMemberRequest.objects.all()
+    serializer_class = serializers.TeamMemberRequestSerializer
+
+class TeamMemberRequestDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Retrieve, update or delete individual TeamMemberRequest objects
+    
+    Supply pk of the object to work on.
     """
     queryset = models.TeamMemberRequest.objects.all()
     serializer_class = serializers.TeamMemberRequestSerializer
 
-class WorkoutList(generics.ListCreateAPIView):
-    """ Create or get Workout objects
+class TeamMemberRequestList(generics.ListCreateAPIView):
+    """ Create or get TeamMemberRequest objects
     
-    Without a pk, returns all Workout objects.
+    returns all TeamMemberRequest objects.
+    """
+    queryset = models.TeamMemberRequest.objects.all()
+    serializer_class = serializers.TeamMemberRequestSerializer
 
-    With a pk, returns just that Workout
+class WorkoutCreate(generics.CreateAPIView):
+    """ Create Workout object """
+    queryset = models.Workout.objects.all()
+    serializer_class = serializers.WorkoutSerializer
+
+class WorkoutDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Retrieve, update or delete individual Workout objects
+    
+    Supply pk of the object to work on.
     """
     queryset = models.Workout.objects.all()
     serializer_class = serializers.WorkoutSerializer
-#[[[end]]] (checksum: 83a3d272e4b33d0142c0701f0b93b165)
+
+class WorkoutList(generics.ListCreateAPIView):
+    """ Create or get Workout objects
+    
+    returns all Workout objects.
+    """
+    queryset = models.Workout.objects.all()
+    serializer_class = serializers.WorkoutSerializer
+#[[[end]]] (checksum: 625c839d42525593b5350a1c48570092)
 
 # Non cog-generated code below
 
@@ -138,7 +226,8 @@ def get_everything_for_user(request):
     competitions = user.competitor_set.all()
 
     # Get teams that user belongs to
-    teams = models.TeamMember.objects.filter(competitor__in=competitions)
+    #teams = models.TeamMember.objects.filter(competitor__in=competitions)
+    teams = []
 
     # Get teams that user is captain of
     captains = models.Team.objects.filter(captain__in=competitions)
