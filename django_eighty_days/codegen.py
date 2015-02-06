@@ -8,12 +8,23 @@ if not settings.configured:
 from django_eighty_days import models
 
 API_TEMPLATE = """
+class %(name)sCreate(generics.CreateAPIView):
+    \"\"\" Create %(name)s object \"\"\"
+    queryset = models.%(name)s.objects.all()
+    serializer_class = serializers.%(name)sSerializer
+
+class %(name)sDetail(generics.RetrieveUpdateDestroyAPIView):
+    \"\"\" Retrieve, update or delete individual %(name)s objects
+
+    Supply pk of the object to work on.
+    \"\"\"
+    queryset = models.%(name)s.objects.all()
+    serializer_class = serializers.%(name)sSerializer
+
 class %(name)sList(generics.ListCreateAPIView):
     \"\"\" Create or get %(name)s objects
-    
-    Without a pk, returns all %(name)s objects.
 
-    With a pk, returns just that %(name)s
+    returns all %(name)s objects.
     \"\"\"
     queryset = models.%(name)s.objects.all()
     serializer_class = serializers.%(name)sSerializer
@@ -23,11 +34,13 @@ SERIALIZE_TEMPLATE = """
 class %(name)sSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.%(name)s
+        depth = %(depth)d
 """
 
 URL_TEMPLATE = """
-    url(r'^%(lname)ss/$', api.%(name)sList.as_view(), name='%(lname)s'),
-    url(r'^%(lname)ss/(?P<pk>[0-9]+)/$', api.%(name)sList.as_view(), name='%(lname)s-detail'),
+    url(r'^create_%(lname)s/$', api.%(name)sCreate.as_view(), name='%(lname)s-create'),
+    url(r'^detail_%(lname)ss/(?P<pk>[0-9]+)/$', api.%(name)sDetail.as_view(), name='%(lname)s-detail'),
+    url(r'^%(lname)ss/$', api.%(name)sList.as_view(), name='%(lname)s-list'),
 """
 
 def get_models():
@@ -43,9 +56,14 @@ def get_api_code(name):
     """ Generate API class for name """
     return API_TEMPLATE % dict(name=name)
 
-def get_serializer_code(name):
+def get_serializer_code(name, clazz):
     """ Generate Serializer class for name """
-    return SERIALIZE_TEMPLATE % dict(name=name)
+    try:
+        depth = clazz.serialize_depth
+    except AttributeError:
+        depth = 1
+
+    return SERIALIZE_TEMPLATE % dict(name=name, depth=depth)
 
 def get_url_code(name):
     """ Generate code needed in urls file for name """
