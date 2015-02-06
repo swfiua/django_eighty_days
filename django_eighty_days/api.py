@@ -213,7 +213,10 @@ def unixtime(dt):
 
 @api_view(['GET'])
 def get_everything_for_user(request):
-    """ Get all user data """
+    """ Get all user data
+
+    FIXME -- probably don't need it now we have nested objects from rest-framework
+    """
     result = {}
 
     user = request.user
@@ -222,20 +225,31 @@ def get_everything_for_user(request):
     if not user.is_authenticated():
         return Response({})
 
+    # get competitors for this user
+    competitors = models.Competitor.objects.filter(user=user)
+
     # Get competitions user is in
-    competitions = user.competitor_set.all()
+    competitions = []
+    for competition in models.Competition.objects.all():
+        for entered in competition.competitors.all():
+            if entered in competitors:
+                competitions.append(competition)
 
-    # Get teams that user belongs to
-    #teams = models.TeamMember.objects.filter(competitor__in=competitions)
+    # Get teams user is in and captain of
+    captains = []
     teams = []
+    for team in models.Team.objects.all():
+        for competitor in competitors:
+            if competitor in team.team_members.all():
+                teams.append(team)
+            if team.captain == competitor:
+                captains.append(team)
 
-    # Get teams that user is captain of
-    captains = models.Team.objects.filter(captain__in=competitions)
-    
-    result['competitions'] = [serializers.CompetitorSerializer(x).data for x in competitions]
-    result['teams'] = [serializers.TeamMemberSerializer(x).data for x in teams]
+    result['competitors'] = [serializers.CompetitorSerializer(x).data for x in competitors]
+    result['competitions'] = [serializers.CompetitionSerializer(x).data for x in competitions]
+    result['teams'] = [serializers.TeamSerializer(x).data for x in teams]
     result['captains'] = [serializers.TeamSerializer(x).data for x in captains]
-
+    
     return Response(result)
 
 if __name__ == '__main__':
