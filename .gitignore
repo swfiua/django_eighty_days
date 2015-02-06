@@ -43,3 +43,7 @@ docs/_build
 
 #emacs backups
 *~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.\#*
