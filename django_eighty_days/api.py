@@ -187,6 +187,13 @@ class WorkoutList(generics.ListCreateAPIView):
 
 # Non cog-generated code below
 
+# Monkey patch the Competitor create
+def perform_competitor_create(self, serializer):
+    serializer.save(user=self.request.user)
+
+CompetitorCreate.perform_create=perform_competitor_create
+
+
 @api_view(['GET'])    
 def datetime_as_timestamp(request):
     """ Get date timestamps """
@@ -249,8 +256,27 @@ def get_everything_for_user(request):
     result['competitions'] = [serializers.CompetitionSerializer(x).data for x in competitions]
     result['teams'] = [serializers.TeamSerializer(x).data for x in teams]
     result['captains'] = [serializers.TeamSerializer(x).data for x in captains]
+    #result['user'] = user
     
     return Response(result)
+
+@api_view(['POST'])
+def add_competitor(request):
+    """ Add a competitor to a competition """
+
+    competitor_id =    int(request.data.get('competitor_id'))
+    competition_id = int(request.data.get('competition_id'))
+
+    competitor = models.Competitor.objects.get(pk=competitor_id)
+    competition = models.Competition.objects.get(pk=competition_id)
+
+    competition.competitors.add(competitor)
+    competition.save()
+
+    result = serializers.CompetitionSerializer(competition).data
+    
+    return Response(dict(competition=result))
+
 
 if __name__ == '__main__':
     # FIXME -- need to figureout how to test django apps
