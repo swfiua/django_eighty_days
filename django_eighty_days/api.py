@@ -1,6 +1,6 @@
 from django_eighty_days import models, serializers
 
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -57,6 +57,7 @@ class CompetitionList(generics.ListCreateAPIView):
     """
     queryset = models.Competition.objects.all()
     serializer_class = serializers.CompetitionSerializer
+    filter_fields = ("id", "name",)
 
 class CompetitorCreate(generics.CreateAPIView):
     """ Create Competitor object """
