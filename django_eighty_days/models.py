@@ -82,7 +82,8 @@ class Place(models.Model):
     name = models.CharField(max_length=NAME_LENGTH, default="nowhere")
     latitude = models.FloatField(default=0.0)
     longitude =  models.FloatField(default=0.0)
-    url = models.URLField()
+    url = models.URLField(
+        default="https://en.wikipedia.org/wiki/Around_the_World_in_Eighty_Days")
     
 class Route(models.Model):
 
