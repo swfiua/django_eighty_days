@@ -11,7 +11,7 @@ API_TEMPLATE = """
 class %(name)sFilter(django_filters.FilterSet):
     \"\"\" Filtering %(name)s objects \"\"\"
     class Meta:
-        model = %(name)s
+        model = models.%(name)s
         fields = []
 
 class %(name)sCreate(generics.CreateAPIView):
