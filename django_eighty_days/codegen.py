@@ -12,7 +12,7 @@ class %(name)sFilter(django_filters.FilterSet):
     \"\"\" Filtering %(name)s objects \"\"\"
     class Meta:
         model = models.%(name)s
-        fields = []
+        fields = %(filter_fields)s
 
 class %(name)sCreate(generics.CreateAPIView):
     \"\"\" Create %(name)s object \"\"\"
@@ -61,7 +61,9 @@ def get_models():
 
 def get_api_code(name):
     """ Generate API class for name """
-    return API_TEMPLATE % dict(name=name)
+    model = getattr(models, name)
+    filter_fields = getattr(model, 'filter_fields', [])
+    return API_TEMPLATE % dict(name=name, filter_fields=filter_fields)
 
 def get_serializer_code(name, clazz):
     """ Generate Serializer class for name """
