@@ -52,7 +52,7 @@ class CompetitionFilter(django_filters.FilterSet):
     """ Filtering Competition objects """
     class Meta:
         model = models.Competition
-        fields = []
+        fields = ['id', 'name']
 
 class CompetitionCreate(generics.CreateAPIView):
     """ Create Competition object """
@@ -243,12 +243,9 @@ class WorkoutList(generics.ListCreateAPIView):
     queryset = models.Workout.objects.all()
     serializer_class = serializers.WorkoutSerializer
     filter_class = WorkoutFilter
-#[[[end]]] (checksum: f56aba8ab3807e88d5dc914a79e01ad1)
+#[[[end]]] (checksum: 95e014732a9f5844ec35155a119a1067)
 
 # Non cog-generated code below
-
-# Monkey patch Filters
-CompetitionFilter.Meta.fields = ["id", "name"]
 
 # Monkey patch the Competitor create
 def perform_competitor_create(self, serializer):
