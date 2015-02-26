@@ -23,6 +23,8 @@ class Competition(models.Model):
     description = models.TextField()
     start = models.DateField(default=datetime.date.today())
     days = models.PositiveIntegerField(default=80)
+    route = models.ForeignKey('Route', blank=True, related_name='competition')
+    
     team_size = models.PositiveIntegerField()
     competitors = models.ManyToManyField(
         'Competitor', related_name='competition', blank=True)
@@ -56,7 +58,7 @@ class Team(models.Model):
     team_member_requests = models.ManyToManyField(
         'TeamMemberRequest',
         related_name='team_member_request', blank=True)
-    
+
     def __str__(self):
 
         return self.name
@@ -75,10 +77,18 @@ class TeamMemberRequest(models.Model):
     
 # Places and routes -- should use GTFS
 class Place(models.Model):
-    pass
+    
+    name = models.CharField(max_length=NAME_LENGTH)
+    latitude = models.FloatField()
+    longitude =  models.FloatField()
+    url = models.URLField()
     
 class Route(models.Model):
-    pass
+
+    name = models.CharField(max_length=NAME_LENGTH)
+    description = models.TextField()
+
+    places = models.ManyToManyField('Place', related_name='route')
 
     
 # Activities
