@@ -1,10 +1,14 @@
-from django_eighty_days import models, serializers
+import datetime
+
+import django_filters
 
 from rest_framework import generics, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-import datetime
+
+from django_eighty_days import models, serializers
+
 
 """[[[cog
 
@@ -57,7 +61,6 @@ class CompetitionList(generics.ListCreateAPIView):
     """
     queryset = models.Competition.objects.all()
     serializer_class = serializers.CompetitionSerializer
-    filter_fields = ("id", "name",)
 
 class CompetitorCreate(generics.CreateAPIView):
     """ Create Competitor object """
@@ -187,6 +190,9 @@ class WorkoutList(generics.ListCreateAPIView):
 #[[[end]]] (checksum: 625c839d42525593b5350a1c48570092)
 
 # Non cog-generated code below
+
+# Monkey patch Filters
+CompetitionFilter.Meta.fields = ["id", "name"]
 
 # Monkey patch the Competitor create
 def perform_competitor_create(self, serializer):
