@@ -20,6 +20,12 @@ for name, clazz in codegen.get_models():
 
 ]]]"""
 
+class ActivityFilter(django_filters.FilterSet):
+    """ Filtering Activity objects """
+    class Meta:
+        model = models.Activity
+        fields = []
+
 class ActivityCreate(generics.CreateAPIView):
     """ Create Activity object """
     queryset = models.Activity.objects.all()
@@ -27,7 +33,7 @@ class ActivityCreate(generics.CreateAPIView):
 
 class ActivityDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Retrieve, update or delete individual Activity objects
-    
+
     Supply pk of the object to work on.
     """
     queryset = models.Activity.objects.all()
@@ -35,11 +41,18 @@ class ActivityDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class ActivityList(generics.ListCreateAPIView):
     """ Create or get Activity objects
-    
+
     returns all Activity objects.
     """
     queryset = models.Activity.objects.all()
     serializer_class = serializers.ActivitySerializer
+    filter_class = ActivityFilter
+
+class CompetitionFilter(django_filters.FilterSet):
+    """ Filtering Competition objects """
+    class Meta:
+        model = models.Competition
+        fields = []
 
 class CompetitionCreate(generics.CreateAPIView):
     """ Create Competition object """
@@ -48,7 +61,7 @@ class CompetitionCreate(generics.CreateAPIView):
 
 class CompetitionDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Retrieve, update or delete individual Competition objects
-    
+
     Supply pk of the object to work on.
     """
     queryset = models.Competition.objects.all()
@@ -56,11 +69,18 @@ class CompetitionDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class CompetitionList(generics.ListCreateAPIView):
     """ Create or get Competition objects
-    
+
     returns all Competition objects.
     """
     queryset = models.Competition.objects.all()
     serializer_class = serializers.CompetitionSerializer
+    filter_class = CompetitionFilter
+
+class CompetitorFilter(django_filters.FilterSet):
+    """ Filtering Competitor objects """
+    class Meta:
+        model = models.Competitor
+        fields = []
 
 class CompetitorCreate(generics.CreateAPIView):
     """ Create Competitor object """
@@ -69,7 +89,7 @@ class CompetitorCreate(generics.CreateAPIView):
 
 class CompetitorDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Retrieve, update or delete individual Competitor objects
-    
+
     Supply pk of the object to work on.
     """
     queryset = models.Competitor.objects.all()
@@ -77,11 +97,18 @@ class CompetitorDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class CompetitorList(generics.ListCreateAPIView):
     """ Create or get Competitor objects
-    
+
     returns all Competitor objects.
     """
     queryset = models.Competitor.objects.all()
     serializer_class = serializers.CompetitorSerializer
+    filter_class = CompetitorFilter
+
+class PlaceFilter(django_filters.FilterSet):
+    """ Filtering Place objects """
+    class Meta:
+        model = models.Place
+        fields = []
 
 class PlaceCreate(generics.CreateAPIView):
     """ Create Place object """
@@ -90,7 +117,7 @@ class PlaceCreate(generics.CreateAPIView):
 
 class PlaceDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Retrieve, update or delete individual Place objects
-    
+
     Supply pk of the object to work on.
     """
     queryset = models.Place.objects.all()
@@ -98,11 +125,18 @@ class PlaceDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class PlaceList(generics.ListCreateAPIView):
     """ Create or get Place objects
-    
+
     returns all Place objects.
     """
     queryset = models.Place.objects.all()
     serializer_class = serializers.PlaceSerializer
+    filter_class = PlaceFilter
+
+class RouteFilter(django_filters.FilterSet):
+    """ Filtering Route objects """
+    class Meta:
+        model = models.Route
+        fields = []
 
 class RouteCreate(generics.CreateAPIView):
     """ Create Route object """
@@ -111,7 +145,7 @@ class RouteCreate(generics.CreateAPIView):
 
 class RouteDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Retrieve, update or delete individual Route objects
-    
+
     Supply pk of the object to work on.
     """
     queryset = models.Route.objects.all()
@@ -119,11 +153,18 @@ class RouteDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class RouteList(generics.ListCreateAPIView):
     """ Create or get Route objects
-    
+
     returns all Route objects.
     """
     queryset = models.Route.objects.all()
     serializer_class = serializers.RouteSerializer
+    filter_class = RouteFilter
+
+class TeamFilter(django_filters.FilterSet):
+    """ Filtering Team objects """
+    class Meta:
+        model = models.Team
+        fields = []
 
 class TeamCreate(generics.CreateAPIView):
     """ Create Team object """
@@ -132,7 +173,7 @@ class TeamCreate(generics.CreateAPIView):
 
 class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Retrieve, update or delete individual Team objects
-    
+
     Supply pk of the object to work on.
     """
     queryset = models.Team.objects.all()
@@ -140,11 +181,18 @@ class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class TeamList(generics.ListCreateAPIView):
     """ Create or get Team objects
-    
+
     returns all Team objects.
     """
     queryset = models.Team.objects.all()
     serializer_class = serializers.TeamSerializer
+    filter_class = TeamFilter
+
+class TeamMemberRequestFilter(django_filters.FilterSet):
+    """ Filtering TeamMemberRequest objects """
+    class Meta:
+        model = models.TeamMemberRequest
+        fields = []
 
 class TeamMemberRequestCreate(generics.CreateAPIView):
     """ Create TeamMemberRequest object """
@@ -153,7 +201,7 @@ class TeamMemberRequestCreate(generics.CreateAPIView):
 
 class TeamMemberRequestDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Retrieve, update or delete individual TeamMemberRequest objects
-    
+
     Supply pk of the object to work on.
     """
     queryset = models.TeamMemberRequest.objects.all()
@@ -161,11 +209,18 @@ class TeamMemberRequestDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class TeamMemberRequestList(generics.ListCreateAPIView):
     """ Create or get TeamMemberRequest objects
-    
+
     returns all TeamMemberRequest objects.
     """
     queryset = models.TeamMemberRequest.objects.all()
     serializer_class = serializers.TeamMemberRequestSerializer
+    filter_class = TeamMemberRequestFilter
+
+class WorkoutFilter(django_filters.FilterSet):
+    """ Filtering Workout objects """
+    class Meta:
+        model = models.Workout
+        fields = []
 
 class WorkoutCreate(generics.CreateAPIView):
     """ Create Workout object """
@@ -174,7 +229,7 @@ class WorkoutCreate(generics.CreateAPIView):
 
 class WorkoutDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Retrieve, update or delete individual Workout objects
-    
+
     Supply pk of the object to work on.
     """
     queryset = models.Workout.objects.all()
@@ -182,12 +237,13 @@ class WorkoutDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class WorkoutList(generics.ListCreateAPIView):
     """ Create or get Workout objects
-    
+
     returns all Workout objects.
     """
     queryset = models.Workout.objects.all()
     serializer_class = serializers.WorkoutSerializer
-#[[[end]]] (checksum: 625c839d42525593b5350a1c48570092)
+    filter_class = WorkoutFilter
+#[[[end]]] (checksum: f56aba8ab3807e88d5dc914a79e01ad1)
 
 # Non cog-generated code below
 
