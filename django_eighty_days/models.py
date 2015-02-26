@@ -80,8 +80,8 @@ class TeamMemberRequest(models.Model):
 class Place(models.Model):
     
     name = models.CharField(max_length=NAME_LENGTH)
-    latitude = models.FloatField()
-    longitude =  models.FloatField()
+    latitude = models.FloatField(default=0.0)
+    longitude =  models.FloatField(default=0.0)
     url = models.URLField()
     
 class Route(models.Model):
