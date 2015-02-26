@@ -87,8 +87,8 @@ class Place(models.Model):
     
 class Route(models.Model):
 
-    name = models.CharField(max_length=NAME_LENGTH)
-    description = models.TextField()
+    name = models.CharField(max_length=NAME_LENGTH, default="")
+    description = models.TextField(default="")
 
     places = models.ManyToManyField('Place', related_name='route')
 
