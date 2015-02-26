@@ -35,6 +35,8 @@ class Competition(models.Model):
 
     serialize_depth = 2
 
+    filter_fields = ['id', 'name']
+
     def __str__(self):
 
         return self.name
