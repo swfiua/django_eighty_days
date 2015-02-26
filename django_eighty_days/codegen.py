@@ -8,6 +8,12 @@ if not settings.configured:
 from django_eighty_days import models
 
 API_TEMPLATE = """
+class %(name)sFilter(django_filters.FilterSet):
+    \"\"\" Filtering %(name)s objects \"\"\"
+    class Meta:
+        model = %(name)s
+        fields = []
+
 class %(name)sCreate(generics.CreateAPIView):
     \"\"\" Create %(name)s object \"\"\"
     queryset = models.%(name)s.objects.all()
@@ -28,6 +34,7 @@ class %(name)sList(generics.ListCreateAPIView):
     \"\"\"
     queryset = models.%(name)s.objects.all()
     serializer_class = serializers.%(name)sSerializer
+    filter_class = %(name)sFilter
 """
 
 SERIALIZE_TEMPLATE = """
