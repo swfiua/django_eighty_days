@@ -23,7 +23,8 @@ class Competition(models.Model):
     description = models.TextField()
     start = models.DateField(default=datetime.date.today())
     days = models.PositiveIntegerField(default=80)
-    route = models.ForeignKey('Route', blank=True, related_name='competition')
+    route = models.ForeignKey('Route', blank=True, null=True,
+                              related_name='competition')
     
     team_size = models.PositiveIntegerField()
     competitors = models.ManyToManyField(
