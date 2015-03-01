@@ -164,7 +164,7 @@ class TeamFilter(django_filters.FilterSet):
     """ Filtering Team objects """
     class Meta:
         model = models.Team
-        fields = ['competition__id']
+        fields = ['competition']
 
 class TeamCreate(generics.CreateAPIView):
     """ Create Team object """
@@ -215,7 +215,7 @@ class WorkoutList(generics.ListCreateAPIView):
     queryset = models.Workout.objects.all()
     serializer_class = serializers.WorkoutSerializer
     filter_class = WorkoutFilter
-#[[[end]]] (checksum: 17573d5a321358a06fe44031dc56c5dd)
+#[[[end]]] (checksum: 1240c68313c8d6d428ff7d0aa695efcf)
 
 # Non cog-generated code below
 

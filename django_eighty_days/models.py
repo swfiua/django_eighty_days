@@ -41,7 +41,9 @@ class Competitor(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='competitor')
     nickname = models.CharField(max_length=NAME_LENGTH)
 
-    competition = models.ForeignKey('Competition', related_name='competitors')
+    competition = models.ForeignKey('Competition', related_name='competitors',
+                                    blank=True, null=True)
+    
     team = models.ForeignKey('Team', related_name='team_members',
                              blank=True, null=True)
     team_member_request = models.ForeignKey('Team', related_name='team_member_requests',
@@ -58,9 +60,10 @@ class Team(models.Model):
     """ A team entered in a competition """
     name = models.CharField(max_length=NAME_LENGTH)
     captain = models.ForeignKey(Competitor, related_name='captain')
-    competition = models.ForeignKey('Competition', related_name='teams')
+    competition = models.ForeignKey('Competition', related_name='teams',
+                                    blank=True, null=True)
     
-    filter_fields = ['competition__id']
+    filter_fields = ['competition']
 
     def __str__(self):
 
@@ -104,7 +107,8 @@ class Workout(models.Model):
     units = models.FloatField()
     date = models.DateField()
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='workouts')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='workouts',
+                             blank=True, null=True)
 
     def __str__(self):
 
