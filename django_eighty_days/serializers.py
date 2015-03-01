@@ -40,13 +40,8 @@ class TeamSerializer(serializers.ModelSerializer):
         model = models.Team
         depth = 1
 
-class TeamMemberRequestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.TeamMemberRequest
-        depth = 1
-
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Workout
         depth = 1
-#[[[end]]] (checksum: ae77f8b2859606bd94c4694d6641a9e4)
+#[[[end]]] (checksum: 419b69ec1fd39b3a56c04ca90f7e0baa)

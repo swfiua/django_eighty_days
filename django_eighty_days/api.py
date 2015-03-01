@@ -52,7 +52,7 @@ class CompetitionFilter(django_filters.FilterSet):
     """ Filtering Competition objects """
     class Meta:
         model = models.Competition
-        fields = ['id', 'name', 'competitors__id']
+        fields = ['id', 'name']
 
 class CompetitionCreate(generics.CreateAPIView):
     """ Create Competition object """
@@ -80,7 +80,7 @@ class CompetitorFilter(django_filters.FilterSet):
     """ Filtering Competitor objects """
     class Meta:
         model = models.Competitor
-        fields = []
+        fields = ['competition', 'user', 'team', 'team_member_request']
 
 class CompetitorCreate(generics.CreateAPIView):
     """ Create Competitor object """
@@ -188,34 +188,6 @@ class TeamList(generics.ListCreateAPIView):
     serializer_class = serializers.TeamSerializer
     filter_class = TeamFilter
 
-class TeamMemberRequestFilter(django_filters.FilterSet):
-    """ Filtering TeamMemberRequest objects """
-    class Meta:
-        model = models.TeamMemberRequest
-        fields = []
-
-class TeamMemberRequestCreate(generics.CreateAPIView):
-    """ Create TeamMemberRequest object """
-    queryset = models.TeamMemberRequest.objects.all()
-    serializer_class = serializers.TeamMemberRequestSerializer
-
-class TeamMemberRequestDetail(generics.RetrieveUpdateDestroyAPIView):
-    """ Retrieve, update or delete individual TeamMemberRequest objects
-
-    Supply pk of the object to work on.
-    """
-    queryset = models.TeamMemberRequest.objects.all()
-    serializer_class = serializers.TeamMemberRequestSerializer
-
-class TeamMemberRequestList(generics.ListCreateAPIView):
-    """ Create or get TeamMemberRequest objects
-
-    returns all TeamMemberRequest objects.
-    """
-    queryset = models.TeamMemberRequest.objects.all()
-    serializer_class = serializers.TeamMemberRequestSerializer
-    filter_class = TeamMemberRequestFilter
-
 class WorkoutFilter(django_filters.FilterSet):
     """ Filtering Workout objects """
     class Meta:
@@ -243,7 +215,7 @@ class WorkoutList(generics.ListCreateAPIView):
     queryset = models.Workout.objects.all()
     serializer_class = serializers.WorkoutSerializer
     filter_class = WorkoutFilter
-#[[[end]]] (checksum: 7ad3cc04093e5835276c38fa266b29bb)
+#[[[end]]] (checksum: 17573d5a321358a06fe44031dc56c5dd)
 
 # Non cog-generated code below
 
