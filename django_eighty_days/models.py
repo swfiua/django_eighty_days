@@ -62,6 +62,8 @@ class Team(models.Model):
         'TeamMemberRequest',
         related_name='team_member_request', blank=True)
 
+    filter_fields = ['competition__id']
+
     def __str__(self):
 
         return self.name
