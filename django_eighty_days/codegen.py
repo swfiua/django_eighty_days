@@ -70,7 +70,7 @@ def get_serializer_code(name, clazz):
     try:
         depth = clazz.serialize_depth
     except AttributeError:
-        depth = 1
+        depth = 0
 
     return SERIALIZE_TEMPLATE % dict(name=name, depth=depth)
 

@@ -13,40 +13,40 @@ for name, clazz in codegen.get_models():
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Activity
-        depth = 1
+        depth = 0
 
 class CompetitionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Competition
-        depth = 2
+        depth = 0
 
 class CompetitorSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Competitor
-        depth = 1
+        depth = 0
 
 class PlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Place
-        depth = 1
+        depth = 0
 
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Route
-        depth = 1
+        depth = 0
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Team
-        depth = 1
+        depth = 0
 
 class TeamMemberRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.TeamMemberRequest
-        depth = 1
+        depth = 0
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Workout
-        depth = 1
-#[[[end]]] (checksum: ae77f8b2859606bd94c4694d6641a9e4)
+        depth = 0
+#[[[end]]] (checksum: 63eb3044c7da0c08f73703f9294deda2)

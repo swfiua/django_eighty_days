@@ -52,7 +52,7 @@ class CompetitionFilter(django_filters.FilterSet):
     """ Filtering Competition objects """
     class Meta:
         model = models.Competition
-        fields = ['id', 'name', 'competitors__id']
+        fields = ['id', 'name']
 
 class CompetitionCreate(generics.CreateAPIView):
     """ Create Competition object """
@@ -80,7 +80,7 @@ class CompetitorFilter(django_filters.FilterSet):
     """ Filtering Competitor objects """
     class Meta:
         model = models.Competitor
-        fields = []
+        fields = ['competition', 'user', 'team']
 
 class CompetitorCreate(generics.CreateAPIView):
     """ Create Competitor object """
@@ -164,7 +164,7 @@ class TeamFilter(django_filters.FilterSet):
     """ Filtering Team objects """
     class Meta:
         model = models.Team
-        fields = ['competition__id']
+        fields = ['competition']
 
 class TeamCreate(generics.CreateAPIView):
     """ Create Team object """
@@ -243,7 +243,7 @@ class WorkoutList(generics.ListCreateAPIView):
     queryset = models.Workout.objects.all()
     serializer_class = serializers.WorkoutSerializer
     filter_class = WorkoutFilter
-#[[[end]]] (checksum: 7ad3cc04093e5835276c38fa266b29bb)
+#[[[end]]] (checksum: f23efd424912cd40706e6bd01b0f2add)
 
 # Non cog-generated code below
 
