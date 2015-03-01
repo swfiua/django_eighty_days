@@ -27,15 +27,10 @@ class Competition(models.Model):
                               related_name='competition')
     
     team_size = models.PositiveIntegerField()
-    competitors = models.ManyToManyField(
-        'Competitor', related_name='competition', blank=True)
-
-    teams = models.ManyToManyField(
-        'Team', related_name='competition', blank=True)
 
     serialize_depth = 2
 
-    filter_fields = ['id', 'name', 'competitors__id']
+    filter_fields = ['id', 'name']
 
     def __str__(self):
 
@@ -46,6 +41,14 @@ class Competitor(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='competitor')
     nickname = models.CharField(max_length=NAME_LENGTH)
 
+    competition = models.ForeignKey('Competition', related_name='competitors')
+    team = models.ForeignKey('Team', related_name='team_members',
+                             blank=True, null=True)
+    team_member_request = models.ForeignKey('Team', related_name='team_member_requests',
+                                            blank=True, null=True)
+
+    filter_fields = ['competition', 'user', 'team', 'team_member_request']
+
     def __str__(self):
 
         return self.nickname
@@ -55,30 +58,14 @@ class Team(models.Model):
     """ A team entered in a competition """
     name = models.CharField(max_length=NAME_LENGTH)
     captain = models.ForeignKey(Competitor, related_name='captain')
-    team_members = models.ManyToManyField(
-        'Competitor', related_name='member', blank=True)
+    competition = models.ForeignKey('Competition', related_name='teams')
     
-    team_member_requests = models.ManyToManyField(
-        'TeamMemberRequest',
-        related_name='team_member_request', blank=True)
-
     filter_fields = ['competition__id']
 
     def __str__(self):
 
         return self.name
 
-
-class TeamMemberRequest(models.Model):
-    """ Handles requests to join a team """
-    team = models.ForeignKey(Team, related_name='member_request')
-    competitor = models.ForeignKey(Competitor)
-
-    def __str__(self):
-
-        return '/'.join(str(self.competitor), str(self.team))
-    
-    
     
 # Places and routes -- should use GTFS
 class Place(models.Model):
@@ -117,6 +104,7 @@ class Workout(models.Model):
     units = models.FloatField()
     date = models.DateField()
 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='workouts')
 
     def __str__(self):
 
