@@ -52,8 +52,7 @@ urlpatterns = [
 
 urlpatterns += [
     url(r'^datetime_as_timestamp/$$', api.datetime_as_timestamp),
-    url(r'^everything_for_user/$$', api.get_everything_for_user),
-    url(r'^add_competitor/$', api.add_competitor, name='add-competitor'),
+    url(r'^everything_for_user/(?P<competition>[0-9]+)/$$', api.get_everything_for_user),
 ]
 
     

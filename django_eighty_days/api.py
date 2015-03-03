@@ -279,63 +279,31 @@ def unixtime(dt):
     return (dt - datetime.datetime(1970, 1, 1)).total_seconds()
 
 @api_view(['GET'])
-def get_everything_for_user(request):
+def get_everything_for_user(request, competition):
     """ Get all user data
 
-    FIXME -- probably don't need it now we have nested objects from rest-framework
+    This is useful as we use the request to figure out the user and make sure
+    they are logged on.
     """
     result = {}
 
     user = request.user
+
+    print(competition)
 
     # don't return anything of not logged in
     if not user.is_authenticated():
         return Response({})
 
     # get competitors for this user
-    competitors = models.Competitor.objects.filter(user=user)
-
-    # Get competitions user is in
-    competitions = []
-    for competition in models.Competition.objects.all():
-        for entered in competition.competitors.all():
-            if entered in competitors:
-                competitions.append(competition)
-
-    # Get teams user is in and captain of
-    captains = []
-    teams = []
-    for team in models.Team.objects.all():
-        for competitor in competitors:
-            if competitor in team.team_members.all():
-                teams.append(team)
-            if team.captain == competitor:
-                captains.append(team)
-
-    result['competitors'] = [serializers.CompetitorSerializer(x).data for x in competitors]
-    result['competitions'] = [serializers.CompetitionSerializer(x).data for x in competitions]
-    result['teams'] = [serializers.TeamSerializer(x).data for x in teams]
-    result['captains'] = [serializers.TeamSerializer(x).data for x in captains]
-    #result['user'] = user
+    competitor = models.Competitor.objects.filter(user=user, competition=competition)
+    
+    if competitor:
+        result['competitor'] = serializers.CompetitorSerializer(competitor[0]).data
+    else:
+        result['competitor'] = {}
     
     return Response(result)
-
-@api_view(['POST'])
-def add_competitor(request):
-    """ Add a competitor to a competition """
-
-    competitor_id =    int(request.data.get('competitor_id'))
-    competition_id = int(request.data.get('competition_id'))
-
-    competitor = models.Competitor.objects.get(pk=competitor_id)
-    competition = models.Competition.objects.get(pk=competition_id)
-
-    competition.competitors.add(competitor)
-    competition.save()
-
-    result = serializers.CompetitionSerializer(competition).data
-    
-    return Response(dict(competition=result))
 
 
 if __name__ == '__main__':
