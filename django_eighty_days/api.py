@@ -279,6 +279,20 @@ def unixtime(dt):
     return (dt - datetime.datetime(1970, 1, 1)).total_seconds()
 
 @api_view(['GET'])
+def user_id(request):
+    """ Return user object """
+
+    user = request.user
+    result = {}
+    if not user.is_authenticated():
+        result['id'] = 0
+    else:
+        result['id'] = user.id
+    
+    return Response(result)
+
+
+@api_view(['GET'])
 def get_everything_for_user(request, competition):
     """ Get all user data
 
